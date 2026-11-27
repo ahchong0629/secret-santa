@@ -242,8 +242,9 @@ function renderAct(){
 
 function renderList(){
   const ps=names(),rm=admin()&&!drawn(),full={};if(admin())S.adm.people.forEach(p=>full[p.id]=p.name);
-  $("cnt").textContent=ps.length;
-  $("names").innerHTML=ps.length?ps.map(p=>{const me=S.me&&S.me.id===p.id,nm=full[p.id]||(me&&S.me.name)||p.name;return `<li class="${me?"me":""}">${esc(nm)}${me?` <span class="you">you</span>`:""}${rm?(S.rm===p.id?` <button class="x" data-rmy="${esc(p.id)}">remove</button><button class="x" id="no">keep</button>`:` <button class="x" data-rm="${esc(p.id)}" aria-label="Remove ${esc(nm)}">✕</button>`):""}</li>`}).join(""):`<li>Nobody yet. Be the first elf!</li>`;
+  const DECOYS=["Ma","Lu","Sa","Jo","El","Da","Ni","An"],show=admin()?[]:DECOYS.slice(0,Math.max(0,8-ps.length)).map(f=>({f}));ps.forEach((p,i)=>show.splice(admin()?show.length:Math.min(show.length,i*2+1),0,p));
+  $("cnt").textContent=admin()||ps.length>=8?ps.length:"5+";
+  $("names").innerHTML=show.length?show.map(p=>{if(p.f)return `<li>${p.f}xxxxxxxxxx</li>`;const me=S.me&&S.me.id===p.id,nm=full[p.id]||(me&&S.me.name)||p.name;return `<li class="${me?"me":""}">${esc(nm)}${me?` <span class="you">you</span>`:""}${rm?(S.rm===p.id?` <button class="x" data-rmy="${esc(p.id)}">remove</button><button class="x" id="no">keep</button>`:` <button class="x" data-rm="${esc(p.id)}" aria-label="Remove ${esc(nm)}">✕</button>`):""}</li>`}).join(""):`<li>Nobody yet. Be the first elf!</li>`;
 }
 
 function renderClock(){

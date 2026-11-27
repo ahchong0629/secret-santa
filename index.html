@@ -1,0 +1,360 @@
+<!-- test -->
+  <p>hello</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>NILT CH Secret Santa</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='8' y='26' width='48' height='34' rx='4' fill='%23c4122f'/%3E%3Crect x='4' y='18' width='56' height='12' rx='3' fill='%23d8213f'/%3E%3Crect x='28' y='18' width='8' height='42' fill='%23f2b630'/%3E%3Cellipse cx='24' cy='13' rx='9' ry='5' fill='%23f2b630'/%3E%3Cellipse cx='40' cy='13' rx='9' ry='5' fill='%23f2b630'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fredoka:wght@500;600&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+/* VOICE occasion: a cosy office gift swap, cute but tidy
+   IDEA the Secret Santa hat and its gift tags: you sign a tag, you get one back sealed
+   PICTURE wrapped presents (and our elf) on the red band; a gift box that unwraps to reveal your match; office polaroids
+   COLOUR cranberry #c4122f band like the office floor, pine #0e5c3e, gold #f2b630 accent, white ground; night #1a0e12
+   TYPE Fredoka 600 display + Nunito text, Caveat for polaroid captions
+   LAYOUT red band: title+facts left, presents right; below: tag card | the list; then how it works, photos, organizer corner. Phone: stacked */
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#1a0e12);--ink:light-dark(#2a1418,#f7ecee);--soft:light-dark(#76565c,#c9aab0);--red:#c4122f;--red2:light-dark(#a50e27,#ff5a72);--pine:light-dark(#0e5c3e,#4cc08f);--pinebg:#0e5c3e;--gold:#f2b630;--card:light-dark(#fdf4f2,#26151b);--line:light-dark(#efd6d0,#4a2a33);--field:light-dark(#ffffff,#1f1116)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 Nunito,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3,.big,.who,.btn{font-family:Fredoka,Nunito,system-ui,sans-serif;font-weight:600}
+h2{font-size:28px;line-height:1.1;margin:0 0 12px}
+h3{font-size:20px;line-height:1.2;margin:0 0 6px}
+p{margin:0 0 10px}
+.band{padding:clamp(28px,4vw,56px) max(5vw,16px)}
+.top{background:var(--red);color:#fff;padding-bottom:0;background-image:radial-gradient(circle,rgba(255,255,255,.22) 1.6px,transparent 2.4px),radial-gradient(circle,rgba(255,255,255,.12) 1px,transparent 1.8px);background-size:90px 90px,46px 46px;background-position:0 0,23px 31px}
+.topin{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:24px;align-items:end}
+h1{font-size:clamp(38px,6vw,60px);line-height:1.02;letter-spacing:-.02em;margin:0 0 12px;text-wrap:balance}
+.lede{font-size:18px;max-width:36ch;color:#ffe8ec;margin-bottom:20px}
+.facts{list-style:none;margin:0 0 clamp(26px,4vw,48px);padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.facts li{background:rgba(60,0,10,.28);border-radius:16px;padding:8px 16px;display:flex;flex-direction:column}
+.facts b{font-size:13px;color:var(--gold)}
+.facts span{font-family:Fredoka,sans-serif;font-size:20px;white-space:nowrap}
+.gbox{position:relative;justify-self:end;width:100%;max-width:420px}
+.gifts{display:block;width:100%;height:auto}
+.elf{position:absolute;top:2%;left:0;width:clamp(96px,13vw,138px);aspect-ratio:1;border-radius:50%;border:5px solid #fff;transform:rotate(-7deg);box-shadow:0 6px 14px rgba(60,0,10,.3);background:#fff}
+.frost{height:16px;background:radial-gradient(circle at 12px 0,var(--red) 11px,transparent 11.5px) repeat-x;background-size:24px 16px}
+.main{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:24px;align-items:start}
+.card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:clamp(20px,3vw,32px)}
+.tag::after{content:"";position:absolute;top:20px;right:22px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:2px solid var(--line)}
+label{display:block;font-weight:800;margin:14px 0 6px}
+input,select,textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--field);border:1.5px solid var(--line);border-radius:12px;padding:11px 13px;min-height:46px}
+textarea{min-height:80px;resize:vertical}
+input:focus,select:focus,textarea:focus,.btn:focus-visible,.seg button:focus-visible{outline:3px solid color-mix(in srgb,var(--gold) 75%,transparent);outline-offset:1px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0 14px}
+.btn{display:inline-flex;align-items:center;justify-content:center;font-size:17px;line-height:1;border:0;border-radius:999px;padding:14px 22px;min-height:48px;background:var(--red);color:#fff;cursor:pointer;text-decoration:none}
+.btn:hover{filter:brightness(1.08)}
+.btn:disabled{opacity:.55;cursor:default}
+.btn.pine{background:var(--pinebg)}
+.btn.alt{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+.seg{display:inline-flex;flex-wrap:wrap;gap:4px;padding:4px;margin-bottom:6px;border:1.5px solid var(--line);border-radius:26px;background:var(--bg)}
+.seg button{border:0;background:transparent;color:var(--ink);font:700 15px Nunito,sans-serif;padding:10px 16px;min-height:44px;border-radius:999px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--pinebg);color:#fff}
+.link{border:0;background:none;padding:0;color:var(--pine);font:inherit;font-weight:800;text-decoration:underline;cursor:pointer;min-height:44px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:18px}
+.note{margin:16px 0 0;padding:12px 14px;border-radius:12px;background:color-mix(in srgb,var(--gold) 18%,transparent)}
+.err{color:var(--red2);font-weight:800;margin:10px 0 0;min-height:1em}
+.ok{color:var(--pine);font-weight:800;margin:6px 0 0}
+.muted{color:var(--soft)}
+hr{border:0;border-top:1.5px dashed var(--line);margin:26px 0}
+.cd{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;padding-bottom:16px;margin-bottom:18px;border-bottom:1.5px dashed var(--line)}
+.big{font-size:clamp(34px,5vw,46px);line-height:1;color:var(--red2);white-space:nowrap}
+.pill{display:inline-block;min-width:1.8em;text-align:center;font-size:16px;padding:2px 8px;border-radius:999px;background:var(--pinebg);color:#fff;vertical-align:middle}
+.names{list-style:none;margin:0 0 10px;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.names li{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;background:var(--bg);border:1.5px solid var(--line);font-weight:700}
+.names li.me{border-color:var(--pine)}
+.you{font-size:13px;color:var(--pine)}
+.x{border:0;background:none;color:var(--soft);font:700 14px Nunito,sans-serif;min-width:32px;min-height:32px;border-radius:999px;cursor:pointer}
+.x:hover{color:var(--red2)}
+.boxwrap{display:grid;grid-template-columns:160px minmax(0,1fr);gap:22px;align-items:center}
+.boxwrap svg{width:160px;height:auto;overflow:visible}
+.lid{transition:transform .8s cubic-bezier(.25,1.5,.5,1);transform-box:fill-box;transform-origin:0 100%}
+.open .lid{transform:translate(-4px,-28px) rotate(-16deg)}
+.slip{transition:transform .7s .25s ease,opacity .4s .25s;transform:translateY(36px);opacity:0}
+.open .slip{transform:none;opacity:1}
+.for{font-weight:800;margin:0}
+.who{font-size:clamp(32px,5vw,46px);line-height:1.05;color:var(--red2);margin:2px 0 10px;overflow-wrap:anywhere}
+.how{max-width:1240px;margin:0 auto;padding-top:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.how h3{color:var(--pine)}
+.pics{max-width:1240px;margin:0 auto;padding-top:0}
+.wall{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,2.5vw,28px);align-items:start}
+.pol{margin:0;background:#fff;padding:10px 10px 6px;border-radius:4px;box-shadow:0 2px 3px rgba(40,10,15,.12),0 10px 24px rgba(40,10,15,.12);transform:rotate(var(--r,0deg))}
+.pol img{display:block;width:100%;height:clamp(220px,28vw,380px);object-fit:cover;border-radius:2px}
+.pol figcaption{font:600 23px/1.2 Caveat,cursive;color:#3a2a2c;text-align:center;padding:6px 0 2px}
+.pol.wide{grid-column:span 2}
+.org{max-width:1240px;margin:0 auto;padding-top:0}
+.org .card{background:transparent;border:2px dashed var(--line)}
+.orgg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;margin-top:14px}
+.orgg textarea{font-size:14px;margin-top:10px}
+.small{font-size:14px}
+@media(max-width:860px){.main{grid-template-columns:minmax(0,1fr)}.how{grid-template-columns:minmax(0,1fr);gap:14px}.orgg{grid-template-columns:minmax(0,1fr)}.wall{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.topin{grid-template-columns:minmax(0,1fr)}.gbox{justify-self:center;max-width:330px}.two{grid-template-columns:minmax(0,1fr)}.boxwrap{grid-template-columns:minmax(0,1fr);justify-items:center;text-align:center}.boxwrap .row{justify-content:center}.pol img{height:200px}}
+@media(prefers-reduced-motion:reduce){.lid,.slip{transition:none}}
+</style>
+<style>
+.lock{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin-top:12px}
+.lock>div{flex:1 1 220px}
+.foot{max-width:1240px;margin:0 auto;padding-top:0;color:var(--soft);font-size:14px}
+</style>
+</head>
+<body>
+<header class="band top">
+  <div class="topin">
+    <div>
+      <h1>NILT CH Secret Santa</h1>
+      <p class="lede">Put your name in the hat, get a secret colleague, and find them a little something.</p>
+      <ul class="facts">
+        <li><b>Sign-ups close</b><span>Tue 1 Dec, 17:00</span></li>
+        <li><b>Gift budget</b><span>max CHF 20</span></li>
+        <li><b>Gift swap</b><span>Thu 10 Dec</span></li>
+      </ul>
+    </div>
+    <div class="gbox">
+      <svg class="gifts" viewBox="0 0 340 200" aria-hidden="true">
+        <g><rect x="70" y="96" width="150" height="104" rx="6" fill="#0e5c3e"/><path d="M180 96h34a6 6 0 0 1 6 6v98h-40z" fill="#000" opacity=".16"/><rect x="134" y="96" width="22" height="104" fill="#f2b630"/><rect x="62" y="80" width="166" height="24" rx="5" fill="#137a52"/><rect x="134" y="80" width="22" height="24" fill="#ffc94a"/><rect x="62" y="80" width="166" height="4" rx="2" fill="#fff" opacity=".3"/>
+          <ellipse cx="128" cy="70" rx="19" ry="10" transform="rotate(-24 128 70)" fill="#f2b630"/><ellipse cx="162" cy="70" rx="19" ry="10" transform="rotate(24 162 70)" fill="#f2b630"/><circle cx="145" cy="77" r="7" fill="#d99a14"/></g>
+        <g><rect x="232" y="128" width="96" height="72" rx="5" fill="#ffffff"/><path d="M302 128h21a5 5 0 0 1 5 5v67h-26z" fill="#7a1020" opacity=".12"/><rect x="271" y="128" width="18" height="72" fill="#c4122f"/><rect x="226" y="114" width="108" height="20" rx="4" fill="#f6eeee"/><rect x="271" y="114" width="18" height="20" fill="#d8213f"/>
+          <ellipse cx="267" cy="106" rx="15" ry="8" transform="rotate(-24 267 106)" fill="#d8213f"/><ellipse cx="293" cy="106" rx="15" ry="8" transform="rotate(24 293 106)" fill="#d8213f"/><circle cx="280" cy="112" r="6" fill="#a50e27"/></g>
+        <g><rect x="14" y="146" width="74" height="54" rx="4" fill="#f2b630"/><path d="M64 146h20a4 4 0 0 1 4 4v50h-24z" fill="#8a5a00" opacity=".18"/><rect x="43" y="146" width="16" height="54" fill="#0e5c3e"/><rect x="8" y="134" width="86" height="16" rx="4" fill="#ffc94a"/><rect x="43" y="134" width="16" height="16" fill="#137a52"/>
+          <ellipse cx="40" cy="127" rx="12" ry="7" transform="rotate(-24 40 127)" fill="#137a52"/><ellipse cx="62" cy="127" rx="12" ry="7" transform="rotate(24 62 127)" fill="#137a52"/><circle cx="51" cy="132" r="5" fill="#0a4730"/></g>
+      </svg>
+      <img class="elf" src="0b11211d-40b7-44e7-bc02-af6d94cff541.png" alt="A colleague in a Santa hat wrapping presents">
+    </div>
+  </div>
+</header>
+<div class="frost"></div>
+
+
+<main class="band main">
+  <section class="card tag" id="act" aria-live="polite"><h2>Opening the hat…</h2></section>
+  <section class="card">
+    <div class="cd"><span class="big" id="cdBig">…</span><span id="cdLbl"></span></div>
+    <h2>On the list <span class="pill" id="cnt">0</span></h2>
+    <ul class="names" id="names"></ul>
+    <p class="muted small">Only names are shown here. Nobody can see who has whom.</p>
+  </section>
+</main>
+
+<section class="band how">
+  <div><h3>Sign up by Tue 1 Dec, 17:00</h3><p>Scan the QR code or open this page, then add your name, email, wish hints and a secret word. No account needed.</p></div>
+  <div><h3>The hat shakes itself</h3><p>At 17:00 the names are drawn into one big gift circle, and each match is sealed with its Santa's secret word. Not even the organizer can peek.</p></div>
+  <div><h3>Unwrap, shop, swap</h3><p>Come back here and unwrap your name with your email and secret word. Spend up to CHF 20 and bring the gift wrapped on Thursday 10 December.</p></div>
+</section>
+
+<section class="band pics" aria-label="Christmas at the office">
+  <h2>Christmas at NILT CH</h2>
+  <div class="wall">
+    <figure class="pol wide" style="--r:-1deg"><img src="035d61d2-d2cf-4ff5-abf7-b444a2a11828.webp" alt="The NILT CH team waving up at the camera around the Christmas tree, holding presents" loading="lazy"><figcaption>The whole crew</figcaption></figure>
+    <figure class="pol" style="--r:1.5deg"><img src="40b6c1c0-ef40-419c-99e3-0f089b3031e3.webp" alt="Office Christmas tree with blue baubles, presents and two gnomes" loading="lazy"><figcaption>Gnomes on gift duty</figcaption></figure>
+    <figure class="pol" style="--r:-2deg"><img src="c42336bb-b945-403e-8c76-d88b3a46a483.jpg" alt="Colleagues hanging snowflake garlands from the office balcony" loading="lazy"><figcaption>Snowflake squad</figcaption></figure>
+  </div>
+</section>
+
+
+<section class="band org" id="org" hidden></section>
+<p class="band foot">Changed your mind or made a typo? Ask the organizer to fix your entry.</p>
+
+<script>
+{
+const SB_URL="https://yjzusogyamfxaybmvpwu.supabase.co",SB_KEY="sb_publishable_ukGRhSb3fJ5sw7Mi3SjI_g_jWWseFIn",PAGE_URL="https://ahchong0629.github.io/secret-santa/";
+const SWAP=Date.parse("2026-12-09T23:00:00Z");
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const sess={get(k){try{return sessionStorage.getItem(k)}catch(e){return null}},set(k,v){try{v?sessionStorage.setItem(k,v):sessionStorage.removeItem(k)}catch(e){}}};
+const S={st:null,skew:0,err:"",me:store.get("santa_me"),mode:"form",rev:null,ask:"",rm:"",late:false,drawing:false,tried:false,drawErr:"",key:sess.get("santa_key"),adm:null,admErr:""};
+const te=new TextEncoder(),td=new TextDecoder(),sub=crypto.subtle;
+const b64=b=>{let s="";for(const x of new Uint8Array(b))s+=String.fromCharCode(x);return btoa(s)};
+const ub=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+const EC={name:"ECDH",namedCurve:"P-256"},AES={name:"AES-GCM",length:256};
+const rnd=n=>crypto.getRandomValues(new Uint8Array(n));
+
+async function newKeys(){const k=await sub.generateKey(EC,true,["deriveKey"]);return{pub:await sub.exportKey("jwk",k.publicKey),priv:await sub.exportKey("jwk",k.privateKey)}}
+async function pwKey(word,salt){const base=await sub.importKey("raw",te.encode(word.trim().toLowerCase()),"PBKDF2",false,["deriveKey"]);return sub.deriveKey({name:"PBKDF2",salt,iterations:250000,hash:"SHA-256"},base,AES,false,["encrypt","decrypt"])}
+async function wrapPriv(priv,word){const salt=rnd(16),iv=rnd(12);const k=await pwKey(word,salt);const ct=await sub.encrypt({name:"AES-GCM",iv},k,te.encode(JSON.stringify({d:priv.d,x:priv.x,y:priv.y})));return{salt:b64(salt),iv:b64(iv),ct:b64(ct)}}
+async function unwrapPriv(w,word){const k=await pwKey(word,ub(w.salt));const pt=await sub.decrypt({name:"AES-GCM",iv:ub(w.iv)},k,ub(w.ct));const j=JSON.parse(td.decode(pt));return{kty:"EC",crv:"P-256",d:j.d,x:j.x,y:j.y,ext:true}}
+async function sealFor(pubJwk,obj){const pub=await sub.importKey("jwk",{kty:"EC",crv:"P-256",x:pubJwk.x,y:pubJwk.y,ext:true},EC,false,[]);const eph=await sub.generateKey(EC,true,["deriveKey"]);const k=await sub.deriveKey({name:"ECDH",public:pub},eph.privateKey,AES,false,["encrypt"]);const iv=rnd(12);const ct=await sub.encrypt({name:"AES-GCM",iv},k,te.encode(JSON.stringify(obj)));const e=await sub.exportKey("jwk",eph.publicKey);return{epk:{x:e.x,y:e.y},iv:b64(iv),ct:b64(ct)}}
+async function openSeal(privJwk,s){const priv=await sub.importKey("jwk",privJwk,EC,false,["deriveKey"]);const epk=await sub.importKey("jwk",{kty:"EC",crv:"P-256",x:s.epk.x,y:s.epk.y,ext:true},EC,false,[]);const k=await sub.deriveKey({name:"ECDH",public:epk},priv,AES,false,["decrypt"]);const pt=await sub.decrypt({name:"AES-GCM",iv:ub(s.iv)},k,ub(s.ct));return JSON.parse(td.decode(pt))}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const r=crypto.getRandomValues(new Uint32Array(1))[0]%(i+1);[a[i],a[r]]=[a[r],a[i]]}return a}
+
+async function rpc(fn,args){
+  const h={"content-type":"application/json",apikey:SB_KEY};if(!SB_KEY.startsWith("sb_"))h.authorization="Bearer "+SB_KEY;
+  const r=await fetch(SB_URL+"/rest/v1/rpc/"+fn,{method:"POST",headers:h,body:JSON.stringify(args||{})});
+  if(!r.ok)throw{code:"http_"+r.status};
+  const t=await r.text();return t?JSON.parse(t):null;
+}
+
+const now=()=>Date.now()+S.skew;
+const closesAt=()=>S.st?Date.parse(S.st.closes_at):Date.parse("2026-12-01T16:00:00Z");
+const drawn=()=>!!(S.st&&S.st.draw);
+const names=()=>(S.st&&S.st.names)||[];
+const isIn=()=>S.me&&names().some(p=>p.id===S.me.id);
+const admin=()=>!!S.adm;
+const fmt=t=>new Date(t).toLocaleString("en-GB",{weekday:"short",day:"numeric",month:"short",hour:"2-digit",minute:"2-digit",timeZone:"Europe/Zurich"});
+function left(ms){const m=Math.max(0,Math.floor(ms/60000)),d=Math.floor(m/1440),h=Math.floor(m%1440/60),mm=m%60;return d?`${d}d ${h}h`:h?`${h}h ${mm}m`:`${mm} min`}
+function setView(el,key,html){if(el.dataset.k===key)return;el.dataset.k=key;el.innerHTML=html;const o=el.querySelectorAll(".open-later");if(o.length)requestAnimationFrame(()=>requestAnimationFrame(()=>o.forEach(b=>b.classList.add("open"))))}
+
+const BOX=`<svg viewBox="0 0 160 150" aria-hidden="true"><ellipse cx="80" cy="144" rx="66" ry="6" fill="#000" opacity=".12"/><g class="slip"><rect x="50" y="26" width="60" height="62" rx="4" fill="#fff" stroke="#e6d3cf"/><rect x="58" y="38" width="44" height="6" rx="3" fill="#c4122f"/><rect x="58" y="51" width="32" height="5" rx="2.5" fill="#e6d3cf"/></g><rect x="22" y="70" width="116" height="72" rx="6" fill="#c4122f"/><path d="M104 70h28a6 6 0 0 1 6 6v60a6 6 0 0 1-6 6h-28z" fill="#000" opacity=".14"/><rect x="70" y="70" width="20" height="72" fill="#f2b630"/><g class="lid"><rect x="14" y="54" width="132" height="22" rx="5" fill="#d8213f"/><rect x="70" y="54" width="20" height="22" fill="#ffc94a"/><rect x="14" y="54" width="132" height="4" rx="2" fill="#fff" opacity=".3"/><ellipse cx="64" cy="45" rx="17" ry="9" transform="rotate(-22 64 45)" fill="#f2b630"/><ellipse cx="96" cy="45" rx="17" ry="9" transform="rotate(22 96 45)" fill="#f2b630"/><circle cx="80" cy="51" r="7" fill="#d99a14"/></g></svg>`;
+
+function formHTML(){
+  const late=S.late&&admin();
+  return `<h2>${late?"Add a late joiner":"Put your name in the hat"}</h2>
+  ${late?`<p class="note">Let them type their own secret word. Afterwards press <b>Re-draw names</b> below and send the email again.</p>`:""}
+  <form id="sf" novalidate>
+  <div class="two"><div><label for="nm">Name</label><input id="nm" maxlength="40" autocomplete="name"></div>
+  <div><label for="em">Email</label><input id="em" type="email" maxlength="80" autocomplete="email" inputmode="email"></div></div>
+  <label for="ht">Wish hints for your Santa <span class="muted">(optional)</span></label>
+  <textarea id="ht" maxlength="200" placeholder="Loves dark chocolate and board games, no candles please"></textarea>
+  <p class="note">Pick a <b>secret word</b> only you know. After the draw you'll unwrap your match here with your email and this word. Capitals don't matter, but nobody can reset it, so remember it!</p>
+  <div class="two"><div><label for="w1">Secret word</label><input id="w1" type="password" autocomplete="new-password" autocapitalize="off" spellcheck="false"></div><div><label for="w2">Type it again</label><input id="w2" type="password" autocomplete="new-password" autocapitalize="off" spellcheck="false"></div></div>
+  <div class="row"><button class="btn" id="go">Put me in the hat</button></div>
+  <p class="err" id="fErr" role="alert"></p><p class="ok" id="fOk"></p></form>`;
+}
+const revealHTML=r=>`<h2>Your Secret Santa mission</h2><div class="boxwrap open-later">${BOX}<div><p class="for">${esc(r.me)}, you're the Secret Santa for</p><p class="who">${esc(r.name)}</p>${r.hint?`<p><b>Their wish hints:</b> ${esc(r.hint)}</p>`:`<p class="muted">No hints given, so go with something cosy.</p>`}<p>Spend up to CHF 20, wrap it, and bring it on Thursday 10 December. Shh!</p><div class="row"><button class="btn alt" id="hide">Wrap it back up</button></div></div></div>`;
+
+function renderAct(){
+  const el=$("act");
+  if(!S.st)return setView(el,"load:"+S.err,`<h2>Opening the hat…</h2><p class="muted">${esc(S.err||"Fetching the list of elves.")}</p>`);
+  if(S.late&&admin())return setView(el,"late",formHTML());
+  if(drawn()){
+    if(S.rev)return setView(el,"rev:"+S.rev.name+S.rev.me,revealHTML(S.rev));
+    const em=(S.me&&S.me.email)||"";
+    return setView(el,"drawn:"+S.st.draw.at,`<h2>Names are drawn!</h2><div class="boxwrap">${BOX}<div><p>The hat was shaken on ${esc(fmt(S.st.draw.at))}. Unwrap your match with your email and secret word.</p></div></div>
+    <form id="rf" class="two" novalidate><div><label for="rem">Your email</label><input id="rem" type="email" autocomplete="email" inputmode="email" value="${esc(em)}"></div><div><label for="rw">Secret word</label><input id="rw" type="password" autocomplete="current-password" autocapitalize="off" spellcheck="false"></div><div class="row"><button class="btn" id="rgo">Unwrap my name</button></div></form><p class="err" id="rErr" role="alert"></p>`);
+  }
+  if(now()>=closesAt()){
+    const n=names().length;
+    return setView(el,"closed:"+(n<2)+":"+S.drawErr,n<2?`<h2>Not enough elves</h2><p>Sign-ups closed with fewer than two names, so there's nobody to draw. Ask the organizer.</p>`:`<h2>Shaking the hat…</h2><p>${esc(S.drawErr||"Sign-ups are closed and the names are being drawn. This takes a moment.")}</p>`);
+  }
+  if(isIn()&&S.mode!=="form")return setView(el,"in:"+S.me.id,`<h2>You're in the hat, ${esc(S.me.name)}!</h2><p>Come back after the draw on Tue 1 Dec at 17:00 and unwrap your match here with your email and secret word.</p><p class="note">Keep your secret word safe. Nobody can reset it.</p><div class="row"><button class="btn alt" id="another">Sign up someone else on this phone</button></div>`);
+  setView(el,"form",formHTML());
+}
+
+function renderList(){
+  const ps=names(),rm=admin()&&!drawn();
+  $("cnt").textContent=ps.length;
+  $("names").innerHTML=ps.length?ps.map(p=>{const me=S.me&&S.me.id===p.id;return `<li class="${me?"me":""}">${esc(p.name)}${me?` <span class="you">you</span>`:""}${rm?(S.rm===p.id?` <button class="x" data-rmy="${esc(p.id)}">remove</button><button class="x" id="no">keep</button>`:` <button class="x" data-rm="${esc(p.id)}" aria-label="Remove ${esc(p.name)}">✕</button>`):""}</li>`}).join(""):`<li>Nobody yet. Be the first elf!</li>`;
+}
+
+function renderClock(){
+  const t=now();let big,lbl;
+  if(drawn()){const d=Math.ceil((SWAP-t)/864e5);if(t>=SWAP+864e5){big="Merry Christmas";lbl=""}else if(d>0){big=d+(d>1?" days":" day");lbl="until the gift swap on Thu 10 Dec"}else{big="Today!";lbl="is gift swap day"}}
+  else if(t<closesAt()){big=left(closesAt()-t);lbl="left to join"}
+  else{big="Closed";lbl="the names are being drawn"}
+  $("cdBig").textContent=big;$("cdLbl").textContent=lbl;
+}
+
+const mailto=(bcc,subj,body)=>"mailto:?"+(bcc.length?"bcc="+bcc.map(encodeURIComponent).join(",")+"&":"")+"subject="+encodeURIComponent(subj)+"&body="+encodeURIComponent(body);
+const msgDrawn=u=>`Hi all,\n\nThe NILT CH Secret Santa names have been drawn!\n\nOpen the page and unwrap your match with your email and the secret word you picked:\n${u}\n\nGift budget: max CHF 20\nGift swap: Thursday 10 December\n\nShh, keep it secret!`;
+const msgInvite=u=>`Hi all,\n\nWe're doing a Secret Santa this year! Put your name in the hat here (or scan the QR code on the poster):\n${u}\n\nSign-ups close Tuesday 1 December at 17:00. No account needed: just your name, email, a few wish hints and a secret word. Names are drawn automatically and nobody, not even me, can see who has whom.\n\nGift budget: max CHF 20\nGift swap: Thursday 10 December`;
+
+function renderOrg(){
+  const el=$("org"),want=location.hash==="#organizer"||!!S.key;
+  if(!want){el.hidden=true;return}
+  el.hidden=false;
+  if(!admin())return setView(el,"lock:"+S.admErr,`<div class="card"><h2>Organizer corner</h2><form id="kf" class="lock" novalidate><div><label for="ak">Organizer key</label><input id="ak" type="password" autocomplete="off" autocapitalize="off" spellcheck="false"></div><button class="btn" id="kgo">Open</button></form><p class="err">${esc(S.admErr)}</p></div>`);
+  const d=drawn(),emails=S.adm.people.map(p=>p.email),n=S.adm.people.length;
+  const subj=d?"Secret Santa: names are drawn!":"Join the NILT CH Secret Santa",body=d?msgDrawn(PAGE_URL):msgInvite(PAGE_URL),href=mailto(d?emails:[],subj,body);
+  const drawPart=d?`<p>Drawn ${esc(fmt(S.st.draw.at))} with ${esc(S.st.draw.n)} names${S.adm.draws>1?`, round ${esc(S.adm.draws)}`:""}.</p>`+(S.ask==="redraw"?`<p>Everyone gets a new match. Send the email again afterwards.</p><div class="row"><button class="btn" id="redrawy">Yes, re-draw</button><button class="btn alt" id="no">Cancel</button></div>`:`<div class="row"><button class="btn alt" id="redraw">Re-draw names</button><button class="btn alt" id="late">${S.late?"Done adding":"Add a late joiner"}</button></div>`)
+    :`<p>Names are drawn automatically after Tue 1 Dec, 17:00, the first time anyone opens the page.</p>`+(S.ask==="draw"?`<p>Close sign-ups and draw ${n} names now?</p><div class="row"><button class="btn" id="drawy">Yes, draw now</button><button class="btn alt" id="no">Cancel</button></div>`:`<div class="row"><button class="btn alt" id="drawnow" ${n<2?"disabled":""}>Draw names now</button></div>`);
+  setView(el,JSON.stringify([d,emails,S.ask,S.late,d&&S.st.draw.at,S.drawErr,S.adm.draws,S.drawing]),`<div class="card"><h2>Organizer corner</h2><p class="muted">Only people with the organizer key see this. You can't see who has whom either: each match is sealed with its Santa's secret word.</p>
+  <div class="orgg"><div><h3>${d?"Tell everyone to unwrap":"Invite colleagues"}</h3><p>${d?`Opens a ready email with all ${emails.length} participants in BCC. It doesn't name anyone's match.`:"Opens a ready invite in your mail app. Add your colleagues as recipients."}</p>
+  <div class="row"><a class="btn" href="${esc(href)}">${d?"Email everyone":"Write the invite"}</a><button class="btn alt" id="copyM">Copy message</button></div>
+  <textarea id="msgT" readonly rows="7" aria-label="Email message">${esc("Subject: "+subj+"\n\n"+body)}</textarea></div>
+  <div><h3>Participant emails (${emails.length})</h3><textarea id="emT" readonly rows="4" aria-label="Participant emails">${esc(emails.join("; "))}</textarea><div class="row"><button class="btn alt" id="copyE">Copy addresses</button><span class="ok" id="cpOk"></span></div>
+  <hr><h3>The draw</h3>${S.drawing?"<p>Drawing…</p>":drawPart}<p class="err">${esc(S.drawErr)}</p><div class="row"><button class="btn alt" id="lockout">Lock organizer corner</button></div></div></div></div>`);
+}
+
+function render(){renderClock();renderAct();renderList();renderOrg()}
+
+async function refresh(){
+  try{const st=await rpc("santa_state");S.skew=Date.parse(st.now)-Date.now();if(S.st&&S.st.draw&&st.draw&&S.st.draw.at!==st.draw.at)S.rev=null;S.st=st;S.err=""}
+  catch(e){S.err="Can't reach the hat right now. Check your connection; it keeps trying."}
+  if(S.key)await loadAdmin(S.key,true);
+  render();check();
+}
+async function loadAdmin(k,quiet){
+  try{const a=await rpc("santa_admin",{p_admin:k});if(a&&a.error){S.adm=null;S.key=null;sess.set("santa_key",null);if(!quiet)S.admErr="That key doesn't open it."}else{S.adm=a;S.key=k;sess.set("santa_key",k);S.admErr=""}}
+  catch(e){if(!quiet)S.admErr="Couldn't check the key. Try again."}
+}
+
+async function runDraw(key){
+  const ps=(await rpc("santa_keys")).filter(p=>p.pub&&p.name);
+  if(ps.length<2)throw{code:"too_few"};
+  const o=shuffle(ps),seals={};
+  for(let i=0;i<o.length;i++){const g=o[i],r=o[(i+1)%o.length];seals[g.id]=await sealFor(g.pub,{to:r.id,name:r.name,hint:r.hint||""})}
+  const res=await rpc("santa_save_draw",{p_seals:seals,p_admin:key||null});
+  if(res&&res.error&&res.error!=="already")throw{code:res.error};
+}
+async function doDraw(key){
+  S.drawing=true;S.drawErr="";S.ask="";render();
+  try{await runDraw(key);S.late=false}catch(e){const c=e&&e.code;S.drawErr=c==="too_few"?"Fewer than two names, so there's nothing to draw.":c==="mismatch"?"Someone signed up mid-draw. Try again.":"The draw didn't go through ("+(c||"error")+"). It tries again on the next visit."}
+  S.drawing=false;await refresh();
+}
+function check(){if(!S.st||S.tried||drawn()||now()<closesAt()||names().length<2)return;S.tried=true;doDraw(null)}
+
+async function signup(f){
+  const err=$("fErr"),ok=$("fOk"),btn=$("go");err.textContent="";ok.textContent="";
+  const v=id=>f.querySelector("#"+id).value.trim();
+  const name=v("nm"),email=v("em").toLowerCase(),hint=v("ht"),w1=v("w1"),w2=v("w2");
+  if(!name)return err.textContent="Add your name first.";
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return err.textContent="That email doesn't look right.";
+  if(w1.length<6)return err.textContent="Pick a secret word of at least 6 letters.";
+  if(w1.toLowerCase()!==w2.toLowerCase())return err.textContent="The two secret words don't match.";
+  btn.disabled=true;btn.textContent="Sealing your tag…";
+  try{
+    const{pub,priv}=await newKeys(),wrap=await wrapPriv(priv,w1);
+    const res=await rpc("santa_sign_up",{p_name:name,p_email:email,p_hint:hint,p_pub:{x:pub.x,y:pub.y},p_wrap:wrap,p_admin:(S.late&&S.key)||null});
+    if(res&&res.error){err.textContent=res.error==="duplicate"?"That email is already in the hat.":res.error==="closed"?"Sign-ups are closed.":res.error==="full"?"The hat is full. Ask the organizer.":"Please check your name and email.";}
+    else if(S.late){f.reset();ok.textContent=name+" is in the hat. Now re-draw below.";await refresh()}
+    else{S.me={id:res.id,name,email};store.set("santa_me",S.me);S.mode="in";await refresh();window.scrollTo({top:$("act").offsetTop-16,behavior:"smooth"})}
+  }catch(e){err.textContent="Couldn't reach the hat. Please try again."}
+  btn.disabled=false;btn.textContent="Put me in the hat";
+}
+async function reveal(){
+  const err=$("rErr"),btn=$("rgo"),email=$("rem").value.trim().toLowerCase(),w=$("rw").value;err.textContent="";
+  if(!email||!w.trim())return err.textContent="Type your email and secret word.";
+  btn.disabled=true;btn.textContent="Unwrapping…";
+  try{
+    const t=await rpc("santa_my_tag",{p_email:email});
+    if(!t){err.textContent="That email isn't in the hat. Check the spelling.";}
+    else if(!t.seal){err.textContent="You joined after the draw. Ask the organizer to re-draw.";}
+    else{let priv;try{priv=await unwrapPriv(t.wrap,w)}catch(x){priv=null}
+      if(!priv)err.textContent="That secret word doesn't open it. Check the spelling (capitals don't matter).";
+      else{const r=await openSeal(priv,t.seal);const live=names().find(p=>p.id===r.to);S.rev={me:t.name,name:(live&&live.name)||r.name,hint:r.hint};if(!S.me||S.me.email!==email){S.me={id:t.id,name:t.name,email};store.set("santa_me",S.me)}render();return}}
+  }catch(e){err.textContent="Couldn't reach the hat. Please try again."}
+  btn.disabled=false;btn.textContent="Unwrap my name";
+}
+async function copyFrom(id,okText){const t=$(id);try{await navigator.clipboard.writeText(t.value);$("cpOk").textContent=okText}catch(e){t.focus();t.select();$("cpOk").textContent="Selected. Press Ctrl+C to copy."}}
+
+document.addEventListener("submit",e=>{e.preventDefault();const id=e.target.id;if(id==="sf")signup(e.target);if(id==="rf")reveal();if(id==="kf"){const k=$("ak").value.trim();if(k)loadAdmin(k,false).then(render)}});
+document.addEventListener("click",async e=>{
+  const t=e.target.closest("button");if(!t)return;const id=t.id,d=t.dataset;
+  if(d.rm){S.rm=d.rm;render();return}
+  if(d.rmy){try{await rpc("santa_remove",{p_admin:S.key,p_id:d.rmy})}catch(x){}S.rm="";await refresh();return}
+  if(id==="no"){S.ask="";S.rm="";render()}
+  else if(id==="hide"){S.rev=null;render()}
+  else if(id==="another"){S.mode="form";render()}
+  else if(id==="drawnow"){S.ask="draw";render()}
+  else if(id==="drawy")doDraw(S.key);
+  else if(id==="redraw"){S.ask="redraw";render()}
+  else if(id==="redrawy")doDraw(S.key);
+  else if(id==="late"){S.late=!S.late;render();if(S.late)window.scrollTo({top:$("act").offsetTop-16,behavior:"smooth"})}
+  else if(id==="lockout"){S.adm=null;S.key=null;S.late=false;sess.set("santa_key",null);history.replaceState(null,"",location.pathname);render()}
+  else if(id==="copyE")copyFrom("emT","Addresses copied");
+  else if(id==="copyM")copyFrom("msgT","Message copied");
+});
+addEventListener("hashchange",render);
+if(S.me)S.mode="in";
+render();refresh();
+setInterval(refresh,20000);setInterval(()=>{renderClock();renderAct();check()},5000);
+}
+</script>
+</body>
+</html>
